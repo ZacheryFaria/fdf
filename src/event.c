@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/28 15:29:32 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/31 10:21:17 by zfaria           ###   ########.fr       */
+/*   Created: 2018/12/31 10:08:56 by zfaria            #+#    #+#             */
+/*   Updated: 2018/12/31 10:20:35 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <mlx.h>
-#include "fdf.h"
 #include <stdlib.h>
+#include "fdf.h"
 
-int	main(void)
+int		event_key(int keycode, void *param)
 {
-	t_mlx *mlx;
-
-	mlx = malloc(sizeof(mlx));
-	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx, 600, 400, "FDF");
-	mlx_key_hook(mlx->win, &event_key, mlx);
-	mlx_loop(mlx);
+	if (keycode == 53)
+	{
+		mlx_destroy_window(((t_mlx *)param)->mlx, ((t_mlx *)param)->win);
+		exit(0);
+	}
+	return (0);
 }
