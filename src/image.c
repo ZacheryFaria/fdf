@@ -6,15 +6,14 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 11:58:34 by zfaria            #+#    #+#             */
-/*   Updated: 2019/01/01 13:13:00 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/01/01 14:56:34 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include "fdf.h"
 #include <stdlib.h>
-#include <math.h>
 #include <libft.h>
+#include "fdf.h"
 
 t_image	*image_new(t_mlx *mlx)
 {
