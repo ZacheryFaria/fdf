@@ -1,8 +1,8 @@
 CC=clang
-GFLAGS=-Werror -Wextra -Wall -I libft/includes -I mlx -I includes
+CFLAGS=-Werror -Wextra -Wall -I libft/includes -I mlx -I includes
 LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit
 NAME=fdf
-SRC=main.c  event.c
+SRC=main.c  event.c image.c vector.c
 _SRC=$(SRC:%=src/%)
 
 _OBJ=$(SRC:%.c=%.o)
@@ -15,14 +15,14 @@ VPATH = src obj libft/includes includes src/str
 $(NAME): $(_OBJ)
 	@make -C libft
 	@make -C mlx 
-	@$(CC) -g -o $(NAME) $(OBJ) $(LFLAGS)
+	@$(CC) -o $(NAME) $(OBJ) $(LFLAGS)
 	@echo done
 
 all: $(NAME)
 
 %.o: %.c
 	@mkdir -p obj
-	$(CC) -g $(GFLAGS) -o obj/$@ -c $<
+	$(CC) -g $(CFLAGS) -o obj/$@ -c $<
 
 clean:
 	@rm -f $(OBJ)
@@ -39,5 +39,3 @@ norm:
 	norminette $(_SRC) includes/*
 
 norme: norm
-
-norman: norm

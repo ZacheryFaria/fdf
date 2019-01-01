@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event.c                                            :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/31 10:08:56 by zfaria            #+#    #+#             */
-/*   Updated: 2019/01/01 11:10:17 by zfaria           ###   ########.fr       */
+/*   Created: 2019/01/01 12:21:11 by zfaria            #+#    #+#             */
+/*   Updated: 2019/01/01 12:23:33 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <mlx.h>
-#include <stdlib.h>
-#include "fdf.h"
-
-int		event_key(int keycode, void *param)
+int	ft_abs(int num)
 {
-	if (keycode == 53)
-	{
-		mlx_destroy_window(((t_mlx *)param)->mlx, ((t_mlx *)param)->win);
-		exit(0);
-	}
-	return (0);
-}
-
-int		event_close(void)
-{
-	exit(0);
+	if (num < 0 && num != -2147483648)
+		return (-num);
+	return (num);
 }

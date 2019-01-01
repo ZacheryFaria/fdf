@@ -6,26 +6,52 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 09:41:55 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/31 10:20:47 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/01/01 12:54:33 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+typedef struct	s_image
+{
+	void		*img;
+	char		*ptr;
+	int			bpp;
+	int			sline;
+	int			end;
+}				t_image;
+
 typedef struct	s_mlx
 {
 	void		*mlx;
 	void		*win;
+	t_image		*img;
+	int			width;
+	int			height;
 }				t_mlx;
 
-typedef struct	s_point
+typedef struct	s_v2d
 {
-	int			x;
-	int			y;
-	int			z;
-}				t_point;
+	int x;
+	int y;
+}				t_v2d;
+
+typedef struct	s_vector3d
+{
+	int x;
+	int y;
+	int z;
+}				t_vector3d;
 
 int				event_key(int keycode, void *param);
+int				event_close(void);
+
+t_image			*image_new(t_mlx *mlx);
+void			image_set_pixel(t_mlx *mlx, t_v2d *vec, int color);
+void			image_plot_line(t_mlx *mlx, t_v2d *v1, t_v2d *v2, int c);
+
+t_vector3d		*vector_make_3d(int x, int y, int z);
+t_v2d			*vector_make_2d(int x, int y);
 
 #endif
