@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:42:25 by awindham          #+#    #+#             */
-/*   Updated: 2019/01/02 12:58:18 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/01/02 14:21:07 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int					ft_abs(int num);
 int					ft_arrlen(void **arr);
 void				ft_putarr(char **str, char c);
 void				ft_putarr_fd(char **str, char c, int fd);
+void				ft_lstapd(t_list **list, t_list *elem);
 
 #endif
