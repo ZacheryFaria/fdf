@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
+/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 11:48:03 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/01 11:50:06 by zfaria           ###   ########.fr       */
+/*   Created: 2018/11/27 11:59:20 by awindham          #+#    #+#             */
+/*   Updated: 2018/12/02 17:14:52 by awindham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 void	*ft_memalloc(size_t size)
 {
-	char	*new;
 	size_t	i;
+	char	*big_meme_daddy;
 
-	new = malloc(size);
-	if (!new)
-		return (NULL);
-	i = -1;
-	while (++i < size)
-		new[i] = 0;
-	return (new);
+	big_meme_daddy = malloc(size);
+	if (big_meme_daddy == 0)
+		return (0);
+	else
+	{
+		i = 0;
+		while (i < size)
+			big_meme_daddy[i++] = 0;
+	}
+	return (big_meme_daddy);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
+/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 12:34:48 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/01 12:37:23 by zfaria           ###   ########.fr       */
+/*   Created: 2018/11/28 20:50:51 by awindham          #+#    #+#             */
+/*   Updated: 2018/12/01 13:30:01 by awindham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_strdel(char **as)
 {
-	ft_memdel((void **)as);
+	ft_memdel((void**)as);
 }

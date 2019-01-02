@@ -3,71 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
+/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/02 10:13:44 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/02 17:49:11 by zfaria           ###   ########.fr       */
+/*   Created: 2018/11/29 13:25:08 by awindham          #+#    #+#             */
+/*   Updated: 2018/12/01 15:39:09 by awindham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 #include <stdlib.h>
 
-static int	count_words(const char *s, char c)
+static int		wordlen(char const *str, char c)
 {
-	int count;
-	int newword;
+	int	i;
+	int	len;
 
-	count = 0;
-	newword = 1;
-	while (*s)
-	{
-		if (*s == c)
-			newword = 1;
-		else if (newword)
-		{
-			newword = 0;
-			count++;
-		}
-		s++;
-	}
-	return (count);
-}
-
-static int	word_length(const char *s, char c)
-{
-	int len;
-
+	i = 0;
 	len = 0;
-	while (s[len] != c && s[len])
+	while (str[i] == c)
+		i++;
+	while (str[i] != c && str[i++] != '\0')
 		len++;
 	return (len);
 }
 
-char		**ft_strsplit(const char *s, char c)
+char			**ft_strsplit(char const *s, char c)
 {
-	char	**res;
-	int		len;
 	int		i;
+	int		j;
+	int		k;
+	char	**an_eggy_boy;
 
-	if (!s)
-		return (NULL);
-	res = (char **)malloc(sizeof(char *) * count_words(s, c) + 1);
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (*s)
+	if (s == 0 || (an_eggy_boy = malloc(sizeof(*an_eggy_boy) *
+					(ft_countwords(s, c) + 1))) == 0)
+		return (0);
+	i = -1;
+	j = 0;
+	while (++i < ft_countwords(s, c))
 	{
-		if (*s == c)
-			s++;
-		else
-		{
-			len = word_length(s, c);
-			res[i] = ft_strsub(s, 0, word_length(s, c));
-			res[i++][len] = 0;
-			s += len;
-		}
+		k = 0;
+		if ((an_eggy_boy[i] = ft_strnew(wordlen(&s[j], c) + 1)) == 0)
+			an_eggy_boy[i] = 0;
+		while (s[j] == c)
+			j++;
+		while (s[j] != c && s[j])
+			an_eggy_boy[i][k++] = s[j++];
+		an_eggy_boy[i][k] = '\0';
 	}
-	res[i] = NULL;
-	return (res);
+	an_eggy_boy[i] = 0;
+	return (an_eggy_boy);
 }

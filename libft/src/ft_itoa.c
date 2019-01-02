@@ -3,40 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
+/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 14:25:56 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/01 14:40:50 by zfaria           ###   ########.fr       */
+/*   Created: 2018/12/01 17:08:55 by awindham          #+#    #+#             */
+/*   Updated: 2018/12/02 17:13:04 by awindham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-char	*ft_itoa(int n)
+/*
+** todo:
+** 1) remove comments
+*/
+
+char		*ft_itoa(int n)
 {
-	char			*res;
-	int				i;
-	unsigned int	num;
+	char	*str;
 
-	res = ft_strnew(13);
-	if (n == 0)
-		return (ft_strdup("0"));
-	if (res)
+	if ((str = (char *)malloc(sizeof(char) * 2)) == 0)
+		return (NULL);
+	if (n == -2147483648)
+		return (ft_strcpy(str, "-2147483648"));
+	if (n < 0)
 	{
-		i = 0;
-		if (n < 0)
-			num = n * -1;
-		else
-			num = n;
-		while (num > 0)
-		{
-			res[i++] = num % 10 + '0';
-			num /= 10;
-		}
-		if (n < 0)
-			res[i++] = '-';
-		res[i] = 0;
-		return (ft_strrev(res));
+		str[0] = '-';
+		str[1] = '\0';
+		str = ft_strjoin(str, ft_itoa(-n));
 	}
-	return (NULL);
+	else if (n >= 10)
+		str = ft_strjoin(ft_itoa(n / 10), ft_itoa(n % 10));
+	else if (n < 10 && n >= 0)
+	{
+		str[0] = n + '0';
+		str[1] = '\0';
+	}
+	return (str);
 }

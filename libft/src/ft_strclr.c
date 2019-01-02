@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
+/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 12:39:36 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/01 12:40:06 by zfaria           ###   ########.fr       */
+/*   Created: 2018/11/28 21:09:57 by awindham          #+#    #+#             */
+/*   Updated: 2018/12/01 13:31:35 by awindham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_strclr(char *s)
 {
-	if (s)
+	if (s == 0)
+		return ;
+	else
 		ft_bzero(s, ft_strlen(s));
 }

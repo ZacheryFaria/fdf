@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
+/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 12:11:11 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/02 16:26:29 by zfaria           ###   ########.fr       */
+/*   Created: 2018/11/30 16:19:26 by awindham          #+#    #+#             */
+/*   Updated: 2018/12/01 14:33:38 by awindham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isspace(int c)
+int		ft_isspace(char c)
 {
-	return ((c == ' ' || c - '\t' < 5) && c != '\200');
+	return (c == ' ' || (unsigned)c - '\t' < 5);
 }

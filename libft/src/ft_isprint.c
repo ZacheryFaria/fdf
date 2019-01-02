@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
+/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 11:34:37 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/01 11:40:48 by zfaria           ###   ########.fr       */
+/*   Created: 2018/11/28 13:42:49 by awindham          #+#    #+#             */
+/*   Updated: 2018/11/30 18:16:50 by awindham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_isprint(int c)
 {
-	if (c > 31 && c < 127)
-		return (1);
-	return (0);
+	return ((unsigned)c - 32 < 95);
 }

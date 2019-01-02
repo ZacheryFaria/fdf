@@ -3,13 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
+/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 14:33:40 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/01 14:33:53 by zfaria           ###   ########.fr       */
+/*   Created: 2018/11/28 20:33:04 by awindham          #+#    #+#             */
+/*   Updated: 2018/12/02 16:28:34 by awindham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <limits.h>
 #include "libft.h"
 
 void	ft_putnbr(int n)

@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstapd.c                                        :+:      :+:    :+:   */
+/*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/02 11:44:47 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/02 15:01:40 by zfaria           ###   ########.fr       */
+/*   Created: 2019/01/02 11:49:27 by zfaria            #+#    #+#             */
+/*   Updated: 2019/01/02 11:50:32 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_lstapd(t_list **alst, t_list *elem)
+int	ft_arrlen(void **arr)
 {
-	t_list *begin_list;
+	int i;
 
-	if (*alst)
-	{
-		begin_list = *alst;
-		while ((*alst)->next)
-			*alst = (*alst)->next;
-		(*alst)->next = elem;
-		*alst = begin_list;
-	}
-	else
-		*alst = elem;
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }

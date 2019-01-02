@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 15:29:32 by zfaria            #+#    #+#             */
-/*   Updated: 2019/01/02 11:54:33 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/01/02 12:02:43 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ int	main(int argc, char **argv)
 	
 	process_args(argc, argv);
 	list = read_file(argv[1]);
+
+	char *str = "0 0 0 0 0 0";
+	ft_putnbr(ft_arrlen((void **)ft_strsplit(str, ' ')));
 
 	mlx = malloc(sizeof(t_mlx));
 	mlx->height = 400;

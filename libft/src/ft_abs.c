@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fstrsub.c                                       :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/06 11:18:20 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/06 11:23:18 by zfaria           ###   ########.fr       */
+/*   Created: 2019/01/01 12:21:11 by zfaria            #+#    #+#             */
+/*   Updated: 2019/01/01 12:23:33 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_fstrsub(char *s, unsigned int start, size_t len)
+int	ft_abs(int num)
 {
-	char	*retval;
-
-	retval = ft_strsub(s, start, len);
-	ft_strdel(&s);
-	return (retval);
+	if (num < 0 && num != -2147483648)
+		return (-num);
+	return (num);
 }

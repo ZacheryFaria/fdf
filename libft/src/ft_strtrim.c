@@ -3,39 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
+/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/02 09:34:31 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/02 09:56:03 by zfaria           ###   ########.fr       */
+/*   Created: 2018/11/29 21:43:02 by awindham          #+#    #+#             */
+/*   Updated: 2018/12/01 14:39:28 by awindham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-char	*ft_strtrim(const char *s)
+char	*ft_strtrim(char const *s)
 {
-	int		start;
-	int		end;
-	char	*bak;
+	char const *fin;
 
-	if (s)
-	{
-		if (ft_strlen(s) == 0)
-			return ((char *)s);
-		bak = ft_strrev((char *)s);
-		if (!bak)
-			return (NULL);
-		start = 0;
-		while (ft_isspace(s[start]))
-			start++;
-		end = 0;
-		while (ft_isspace(bak[end]))
-			end++;
-		if (start + end > (int)ft_strlen(s))
-			return (ft_strdup(""));
-		bak = ft_strnew(ft_strlen(s) - start - end);
-		bak = ft_strncpy(bak, (char *)s + start, ft_strlen(s) - start - end);
-		return (bak);
-	}
-	return (NULL);
+	if (s == NULL)
+		return (NULL);
+	while (*s == ' ' || *s == '\t' || *s == '\n')
+		s++;
+	if (*s == '\0')
+		return (ft_strnew(0));
+	fin = s + ft_strlen(s) - 1;
+	while (*fin == ' ' || *fin == '\t' || *fin == '\n')
+		fin--;
+	return (ft_strsub(s, 0, fin - s + 1));
 }
