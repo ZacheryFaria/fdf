@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/28 14:09:05 by awindham          #+#    #+#             */
-/*   Updated: 2018/11/30 18:11:45 by awindham         ###   ########.fr       */
+/*   Created: 2018/12/01 11:31:42 by zfaria            #+#    #+#             */
+/*   Updated: 2018/12/01 11:39:48 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_isdigit(int c)
 {
-	return ((unsigned)c - '0' < 10);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

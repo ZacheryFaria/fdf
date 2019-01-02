@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/01 14:35:21 by zfaria            #+#    #+#             */
-/*   Updated: 2019/01/01 14:58:32 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/01/02 11:45:38 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 t_list	*read_coords(int fd)
 {
-	t_list	*new;
-	t_v3d	*point;
+	t_list		*new;
+	t_map_point	*point;
 	char	*str;
 
 	new = 0;

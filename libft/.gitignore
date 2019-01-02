@@ -9,5 +9,3 @@ test.c
 test.h
 test.sh
 a.out
-.vscode/
-libft.a

@@ -2,7 +2,7 @@ CC=clang
 CFLAGS=-Werror -Wextra -Wall -I libft/includes -I mlx -I includes
 LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit
 NAME=fdf
-SRC=main.c event.c image.c vector.c reader.c
+SRC=main.c event.c image.c vector.c reader.c map.c
 _SRC=$(SRC:%=src/%)
 
 _OBJ=$(SRC:%.c=%.o)

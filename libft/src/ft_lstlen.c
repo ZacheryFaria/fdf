@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 14:11:39 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/01 14:23:34 by zfaria           ###   ########.fr       */
+/*   Created: 2018/12/02 15:22:40 by zfaria            #+#    #+#             */
+/*   Updated: 2018/12/02 15:23:20 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-void	ft_putstr_fd(const char *str, int fd)
+int		ft_lstlen(t_list *lst)
 {
-	if (str)
-		write(fd, str, ft_strlen(str));
+	int count;
+
+	count = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		count++;
+	}
+	return (count);
 }

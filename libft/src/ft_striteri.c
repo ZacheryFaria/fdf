@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/28 21:57:32 by awindham          #+#    #+#             */
-/*   Updated: 2018/12/01 13:34:31 by awindham         ###   ########.fr       */
+/*   Created: 2018/12/01 12:44:15 by zfaria            #+#    #+#             */
+/*   Updated: 2018/12/01 13:18:15 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	unsigned int i;
+	int i;
 
+	i = 0;
 	if (s && f)
 	{
-		i = 0;
 		while (s[i])
 		{
 			f(i, &s[i]);

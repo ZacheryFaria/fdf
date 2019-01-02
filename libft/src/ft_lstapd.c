@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstapd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 14:11:39 by zfaria            #+#    #+#             */
-/*   Updated: 2018/12/01 14:23:34 by zfaria           ###   ########.fr       */
+/*   Created: 2018/12/02 11:44:47 by zfaria            #+#    #+#             */
+/*   Updated: 2018/12/02 15:01:40 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-void	ft_putstr_fd(const char *str, int fd)
+void	ft_lstapd(t_list **alst, t_list *elem)
 {
-	if (str)
-		write(fd, str, ft_strlen(str));
+	t_list *begin_list;
+
+	if (*alst)
+	{
+		begin_list = *alst;
+		while ((*alst)->next)
+			*alst = (*alst)->next;
+		(*alst)->next = elem;
+		*alst = begin_list;
+	}
+	else
+		*alst = elem;
 }

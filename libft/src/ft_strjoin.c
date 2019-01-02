@@ -3,30 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 15:47:00 by awindham          #+#    #+#             */
-/*   Updated: 2018/12/02 11:56:01 by awindham         ###   ########.fr       */
+/*   Created: 2018/12/01 13:26:45 by zfaria            #+#    #+#             */
+/*   Updated: 2018/12/01 13:30:12 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char	*fresh;
+	char	*str;
 
-	if (s1 == 0 || s2 == 0)
-		return (0);
-	if ((fresh = malloc((ft_strlen(s1)
-					+ ft_strlen(s2) + 1)
-					* sizeof(char))) == 0)
-		return (0);
-	if (ft_strlen(s1))
-		ft_memcpy(fresh, s1, ft_strlen(s1));
-	if (ft_strlen(s2))
-		ft_memcpy(fresh + ft_strlen(s1), s2, ft_strlen(s2));
-	*(fresh + ft_strlen(s1) + ft_strlen(s2)) = '\0';
-	return (fresh);
+	if (s1 && s2)
+	{
+		str = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
+		if (str)
+		{
+			str = ft_strcpy((char *)str, (char *)s1);
+			str = ft_strcat((char *)str, (char *)s2);
+			return (str);
+		}
+	}
+	return (NULL);
 }

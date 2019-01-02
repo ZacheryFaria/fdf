@@ -3,31 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 18:13:54 by awindham          #+#    #+#             */
-/*   Updated: 2018/12/02 17:15:32 by awindham         ###   ########.fr       */
+/*   Created: 2018/11/28 13:12:41 by zfaria            #+#    #+#             */
+/*   Updated: 2018/12/01 13:04:20 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
+#include <string.h>
 
-void	*ft_memmove(void *dst, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*d;
-	char	*s;
-	size_t	one_unsigned_integer;
+	unsigned char	*osrc;
+	unsigned char	*odst;
 
+	odst = (unsigned char *)dst;
+	osrc = (unsigned char *)src;
 	if (src < dst)
-		return (ft_memcpy(dst, src, n));
+		while (len--)
+			odst[len] = osrc[len];
 	else
-	{
-		d = (char*)dst;
-		s = (char*)src;
-		one_unsigned_integer = 0;
-		while (one_unsigned_integer++ < n)
-			d[one_unsigned_integer - 1] = s[one_unsigned_integer - 1];
-	}
+		return (ft_memcpy(dst, src, len));
 	return (dst);
 }

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/30 16:03:38 by awindham          #+#    #+#             */
-/*   Updated: 2018/11/30 16:13:56 by awindham         ###   ########.fr       */
+/*   Created: 2018/12/01 11:36:08 by zfaria            #+#    #+#             */
+/*   Updated: 2018/12/01 11:36:29 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_isupper(int c)
 {
-	return ((unsigned)c - 'A' < 26);
+	if (c >= 'A' && c <= 'Z')
+		return (c);
+	return (0);
 }

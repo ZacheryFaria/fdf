@@ -3,36 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 20:40:34 by awindham          #+#    #+#             */
-/*   Updated: 2018/12/02 11:56:19 by awindham         ###   ########.fr       */
+/*   Created: 2018/11/30 14:38:00 by zfaria            #+#    #+#             */
+/*   Updated: 2018/12/02 20:05:50 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <string.h>
 
-char	*ft_strnstr(char const *hay, char const *nee, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
+	int		exists;
 	size_t	i;
+	size_t	j;
 
-	if (!*nee)
-		return ((char*)hay);
-	else
+	if (!*needle || haystack == needle || (!*haystack && !*needle))
+		return ((char *)haystack);
+	j = 0;
+	while (*haystack)
 	{
-		while (*hay && len)
+		if (*haystack == *needle)
 		{
-			i = 0;
-			while (hay[i] == nee[i] && i < len)
+			exists = 1;
+			i = -1;
+			while (needle[++i])
 			{
-				i++;
-				if (!nee[i])
-					return ((char*)hay);
+				if (haystack[i] != needle[i])
+					exists = 0;
 			}
-			len--;
-			hay++;
+			if (exists && j + i <= len)
+				return ((char *)haystack);
 		}
+		j++;
+		haystack++;
 	}
-	return (0);
+	return (NULL);
 }

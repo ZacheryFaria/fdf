@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/01 10:33:34 by zfaria            #+#    #+#             */
-/*   Updated: 2019/01/02 11:45:17 by zfaria           ###   ########.fr       */
+/*   Created: 2019/01/02 11:45:19 by zfaria            #+#    #+#             */
+/*   Updated: 2019/01/02 11:52:39 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "fdf.h"
+#include <stdlib.h>
 
-t_v2d		*vector_make_2d(int x, int y)
+t_map_point	*make_map_point(int x, int y, int z, int color)
 {
-	t_v2d	*v2d;
+	t_map_point *map;
 
-	if ((v2d = malloc(sizeof(t_v2d))) == NULL)
+	if ((map = malloc(sizeof(t_map_point))) == NULL)
 		return (NULL);
-	v2d->x = x;
-	v2d->y = y;
-	return (v2d);
+	map->x = x;
+	map->y = y;
+	map->z = z;
+	map->color = color;
+	return (map);
+}
+
+t_map_point	**make_map_array(char *str)
+{
+	char		**strarr;
+	t_map_point	**map_arr;
+
+	strarr = ft_strsplit(str, ' ');
+	map_arr = malloc(ft_arrlen((void **)strarr) * sizeof(t_map_point *));
+	return (0);
 }

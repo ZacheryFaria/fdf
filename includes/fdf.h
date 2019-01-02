@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 09:41:55 by zfaria            #+#    #+#             */
-/*   Updated: 2019/01/01 14:59:16 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/01/02 11:52:48 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ typedef struct	s_v2d
 	int y;
 }				t_v2d;
 
-typedef struct	s_v3d
+typedef struct	 s_map_point
 {
 	int x;
 	int y;
 	int z;
-}				t_v3d;
+	int color;
+}				t_map_point;
 
 int				event_key(int keycode, void *param);
 int				event_close(void);
@@ -59,8 +60,9 @@ t_image			*image_new(t_mlx *mlx);
 void			image_set_pixel(t_mlx *mlx, t_v2d *vec, int color);
 void			image_plot_line(t_mlx *mlx, t_v2d *v1, t_v2d *v2, int c);
 
-t_v3d			*vector_make_3d(int x, int y, int z);
 t_v2d			*vector_make_2d(int x, int y);
+
+t_map_point		*make_map_point(int x, int y, int z, int color);
 
 t_list			*read_file(char *str);
 t_list			*read_coords(int fd);

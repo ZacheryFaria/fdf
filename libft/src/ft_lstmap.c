@@ -3,34 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awindham <awindham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/02 11:01:55 by awindham          #+#    #+#             */
-/*   Updated: 2018/12/02 11:20:12 by awindham         ###   ########.fr       */
+/*   Created: 2018/12/02 11:31:26 by zfaria            #+#    #+#             */
+/*   Updated: 2018/12/02 15:02:25 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
+#include <stdio.h>
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list		*jellyfish;
-	t_list		*nlist;
+	t_list *new;
 
-	if (lst == 0)
-		return (NULL);
-	nlist = f(lst);
-	jellyfish = nlist;
-	while (lst->next)
+	if (lst)
 	{
-		lst = lst->next;
-		if ((nlist->next = f(lst)) == 0)
-		{
-			free(nlist->next);
-			return (NULL);
-		}
-		nlist = nlist->next;
+		new = f(lst);
+		while ((lst = lst->next))
+			ft_lstapd(&new, f(lst));
+		return (new);
 	}
-	return (jellyfish);
+	return (NULL);
 }
