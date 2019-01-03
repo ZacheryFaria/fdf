@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 11:58:34 by zfaria            #+#    #+#             */
-/*   Updated: 2019/01/01 14:56:34 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/01/03 15:10:08 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	image_plot_line(t_mlx *mlx, t_v2d *v1, t_v2d *v2, int color)
 	t_v2d	*npoint;
 	int		err;
 
-	sign = vector_make_2d(v1->x < v2->x ? 1 : -1, v1->y < v2->y ? 1 : -1);
-	dpoint = vector_make_2d(ft_abs(v2->x - v1->x), ft_abs(v2->y - v1->y));
+	sign = new_vec(v1->x < v2->x ? 1 : -1, v1->y < v2->y ? 1 : -1);
+	dpoint = new_vec(ft_abs(v2->x - v1->x), ft_abs(v2->y - v1->y));
 	delta_err = (dpoint->x > dpoint->y ? dpoint->x : -dpoint->y) / 2;
-	npoint = vector_make_2d(v1->x, v2->y);
+	npoint = new_vec(v1->x, v2->y);
 	while (!(v1->x == v2->x && v1->y == v2->y))
 	{
 		image_set_pixel(mlx, v1, color);
