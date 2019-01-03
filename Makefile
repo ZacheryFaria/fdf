@@ -3,19 +3,17 @@ CFLAGS=-Werror -Wextra -Wall -I libft/includes -I mlx -I includes
 LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit
 NAME=fdf
 SRC=main.c event.c image.c vector.c reader.c map.c
-_SRC=$(SRC:%=src/%)
 
-_OBJ=$(SRC:%.c=%.o)
-OBJ=$(_OBJ:%=obj/%)
+OBJ=$(SRC:%.c=%.o)
 
 .PHONY: clean fclean all re norm norme debug
 
-VPATH = src obj libft/includes includes src/str
+VPATH = src obj libft/includes includes
 
-$(NAME): $(_OBJ)
+$(NAME): $(OBJ)
 	@make -C libft
 	@make -C mlx 
-	@$(CC) -o $(NAME) $(OBJ) $(LFLAGS)
+	@$(CC) -o $(NAME) obj/* $(LFLAGS)
 	@echo done
 
 all: $(NAME)
@@ -25,17 +23,17 @@ all: $(NAME)
 	$(CC) -g $(CFLAGS) -o obj/$@ -c $<
 
 clean:
-	@rm -f $(OBJ)
+	@rm -rf obj/
 	@make -C libft clean
 	@make -C mlx clean
 
 fclean: clean
-	@rm -f $(NAME)
-	@make -C libft fclean
+	rm -f $(NAME)
+	make -C libft fclean
 
 re: fclean all
 
 norm:
-	norminette $(_SRC) includes/*
+	norminette src/. includes/*
 
 norme: norm
