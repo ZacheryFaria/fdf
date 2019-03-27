@@ -1,39 +1,43 @@
 CC=clang
-CFLAGS=-Werror -Wextra -Wall -I libft/includes -I mlx -I includes
 LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit
+CFLAGS=-Werror -Wextra -Wall -g -Ilibft/ -I. -I mlx -I includes
 NAME=fdf
-SRC=main.c event.c image.c vector.c reader.c map.c parse.c
+SRC=$(wildcard src/*)
+OBJ=$(SRC:src/%.c=%.o)
+SHELL := /bin/bash
 
-OBJ=$(SRC:%.c=%.o)
+.PHONY: clean fclean all re norm norme debug test norman
 
-.PHONY: clean fclean all re norm norme debug
+VPATH = src obj libft/includes include
 
-VPATH = src obj libft/includes includes
-
-$(NAME): $(OBJ)
+$(NAME): update $(OBJ)
 	@make -C libft
-	@make -C mlx 
-	@$(CC) -o $(NAME) obj/* $(LFLAGS)
-	@echo done
+	@$(CC) -o $(NAME) obj/* $(LIBFLAGS)
+	@echo "fdf build complete!"
 
 all: $(NAME)
 
 %.o: %.c
 	@mkdir -p obj
-	$(CC) -g $(CFLAGS) -o obj/$@ -c $<
+	@$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 clean:
+	@make -C libft/ clean
 	@rm -rf obj/
-	@make -C libft clean
-	@make -C mlx clean
 
 fclean: clean
-	rm -f $(NAME)
-	make -C libft fclean
+	@make -C libft/ fclean
+	@rm -f $(NAME)
 
 re: fclean all
 
 norm:
-	norminette src/. includes/*
+	norminette src/. includes/.
+
+update:
+	@./update.sh
 
 norme: norm
+
+norman:
+	-norminette * | grep -iv warning
