@@ -1,6 +1,6 @@
 CC=clang
-LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit
-CFLAGS=-Werror -Wextra -Wall -g -Ilibft/ -I. -I mlx -I includes
+CFLAGS=-Werror -Wextra -Wall -g -Ilibft -I. -Imlx -Iincludes -fsanitize=address
+LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit -fsanitize=address
 NAME=fdf
 SRC=$(wildcard src/*)
 OBJ=$(SRC:src/%.c=%.o)
@@ -12,7 +12,7 @@ VPATH = src obj libft/includes include
 
 $(NAME): update $(OBJ)
 	@make -C libft
-	@$(CC) -o $(NAME) obj/* $(LIBFLAGS)
+	@$(CC) -o $(NAME) obj/* $(LFLAGS)
 	@echo "fdf build complete!"
 
 all: $(NAME)

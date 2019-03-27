@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reader.c                                           :+:      :+:    :+:   */
+/*   coor.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/01 14:35:21 by zfaria            #+#    #+#             */
-/*   Updated: 2019/01/03 14:28:16 by zfaria           ###   ########.fr       */
+/*   Created: 2019/03/27 13:06:52 by zfaria            #+#    #+#             */
+/*   Updated: 2019/03/27 13:15:29 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include "fdf.h"
+#include <fdf.h>
 
-t_list	*read_coords(int fd)
+t_coor	*new_coor(int x, int y, int z, int color)
 {
-	t_list		*new;
-	char		*str;
+	t_coor *coor;
 
-	new = 0;
-	while (get_next_line(fd, &str, 16))
-		ft_lstapd(&new, ft_lstnew(str, ft_strlen(str) + 1));	
-	return (new);
-}
-
-t_list	*read_file(char *str)
-{
-	int fd;
-
-	if ((fd = open(str, O_RDONLY)) < 0)
-		die(NO_FILE);
-	return (read_coords(fd));
+	coor = ft_memalloc(sizeof(coor));
+	coor->x = x;
+	coor->y = y;
+	coor->z = z;
+	coor->color = color;
+	return (coor);
 }

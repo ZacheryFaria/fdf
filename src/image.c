@@ -6,14 +6,14 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 11:58:34 by zfaria            #+#    #+#             */
-/*   Updated: 2019/01/03 15:10:08 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/27 14:40:02 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <stdlib.h>
 #include <libft.h>
-#include "fdf.h"
+#include <fdf.h>
 
 t_image	*image_new(t_mlx *mlx)
 {
@@ -26,27 +26,30 @@ t_image	*image_new(t_mlx *mlx)
 		free(ret);
 		return (NULL);
 	}
-	ret->ptr = mlx_get_data_addr(ret->img, &ret->bpp, &ret->sline, &ret->end);
+	ret->ptr = (int *)mlx_get_data_addr(ret->img, &ret->bpp,
+		&ret->wid, &ret->end);
 	return (ret);
 }
 
-void	image_set_pixel(t_mlx *mlx, t_v2d *vec, int color)
+void	image_set_pixel(t_mlx *mlx, t_coor *vec, int color)
 {
-	*((int *)mlx->img->ptr + (vec->x + (vec->y * mlx->width))) = color;
+	if (vec->y + 1 >= mlx->height)
+		return ;
+	mlx->img->ptr[vec->x + (vec->y * mlx->img->wid / 4)] = color;
 }
 
-void	image_plot_line(t_mlx *mlx, t_v2d *v1, t_v2d *v2, int color)
+void	image_plot_line(t_mlx *mlx, t_coor *v1, t_coor *v2, int color)
 {
-	t_v2d	*dpoint;
-	t_v2d	*sign;
+	t_coor	*dpoint;
+	t_coor	*sign;
 	int		delta_err;
-	t_v2d	*npoint;
+	t_coor	*npoint;
 	int		err;
 
-	sign = new_vec(v1->x < v2->x ? 1 : -1, v1->y < v2->y ? 1 : -1);
-	dpoint = new_vec(ft_abs(v2->x - v1->x), ft_abs(v2->y - v1->y));
+	sign = new_coor(v1->x < v2->x ? 1 : -1, v1->y < v2->y ? 1 : -1, 0, 0);
+	dpoint = new_coor(ft_abs(v2->x - v1->x), ft_abs(v2->y - v1->y), 0, 0);
 	delta_err = (dpoint->x > dpoint->y ? dpoint->x : -dpoint->y) / 2;
-	npoint = new_vec(v1->x, v2->y);
+	npoint = new_coor(v1->x, v2->y, 0, 0);
 	while (!(v1->x == v2->x && v1->y == v2->y))
 	{
 		image_set_pixel(mlx, v1, color);
@@ -62,4 +65,5 @@ void	image_plot_line(t_mlx *mlx, t_v2d *v1, t_v2d *v2, int color)
 			v1->y += sign->y;
 		}
 	}
+	freev(v1, v2, dpoint, npoint, sign, 0);
 }
