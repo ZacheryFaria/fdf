@@ -11,6 +11,7 @@ SHELL := /bin/bash
 VPATH = src obj libft/includes include
 
 $(NAME): update $(OBJ)
+	@make -C mlx
 	@make -C libft
 	@$(CC) -o $(NAME) obj/* $(LFLAGS)
 	@echo "fdf build complete!"
@@ -22,10 +23,12 @@ all: $(NAME)
 	@$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 clean:
+	@make -C mlx clean
 	@make -C libft/ clean
 	@rm -rf obj/
 
 fclean: clean
+	@make -C mlx fclean
 	@make -C libft/ fclean
 	@rm -f $(NAME)
 
