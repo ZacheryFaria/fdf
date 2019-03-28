@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 11:58:34 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/28 15:35:46 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/28 15:39:55 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	image_set_pixel(t_mlx *mlx, t_coor *vec, int color)
 {
 	if (vec->y + 1 >= mlx->height)
 		return ;
-	if (!(vec->x < 0 || vec->x > mlx->width)
-		&& !(vec->y < 0 || vec->y > mlx->height))
+	if (!(vec->x < 0 || vec->x >= mlx->width)
+		&& !(vec->y < 0 || vec->y >= mlx->height))
 		mlx->img->ptr[(int)(vec->x + (vec->y * mlx->img->wid / 4))] = color;
 }
 
