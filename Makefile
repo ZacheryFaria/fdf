@@ -28,7 +28,6 @@ clean:
 	@rm -rf obj/
 
 fclean: clean
-	@make -C mlx fclean
 	@make -C libft/ fclean
 	@rm -f $(NAME)
 

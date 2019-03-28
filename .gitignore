@@ -4,4 +4,6 @@ obj/
 .vscode
 fdf
 .#*
+*.o
 mlx/libmlx.a
+fdf2

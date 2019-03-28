@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 11:58:34 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/27 14:40:02 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/28 11:55:14 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ void	image_plot_line(t_mlx *mlx, t_coor *v1, t_coor *v2, int color)
 			v1->y += sign->y;
 		}
 	}
-	freev(v1, v2, dpoint, npoint, sign, 0);
+	freev(dpoint, sign, npoint, 0);
 }

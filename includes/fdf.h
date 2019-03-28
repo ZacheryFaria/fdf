@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 09:41:55 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/27 13:26:39 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/28 11:46:59 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define FDF_H
 
 # include <libft.h>
-
-enum			e_status
-{
-	NO_FILE,
-	ARGC
-};
 
 typedef struct	s_image
 {
@@ -58,12 +52,9 @@ t_coor			*new_coor(int x, int y, int z, int color);
 
 #define COOR2(x,y) new_coor(x, y, 0, 0)
 
-t_list			*read_file(char *str);
-t_list			*read_coords(int fd);
+t_list			*read_file(char *str, int *len);
 
-void			die(int status);
 void			freev(void *v, ...);
-
-void			plot_lines(t_list *list, t_mlx *mlx);
+void			plot_map(t_mlx *mlx, t_list *points, int width);
 
 #endif

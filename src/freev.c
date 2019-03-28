@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 13:24:21 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/27 13:27:04 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/28 11:50:03 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	freev(void *v, ...)
 	free(v);
 	while ((a = va_arg(vargs, void*)))
 	{
-		free(a);
+		if (a)
+			free(a);
 		a = 0;
 	}
 }
