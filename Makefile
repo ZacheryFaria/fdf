@@ -1,6 +1,6 @@
 CC=clang
-CFLAGS=-Werror -Wextra -Wall -g -Ilibft -I. -Imlx -Iincludes -fsanitize=address
-LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit -fsanitize=address
+CFLAGS=-Werror -Wextra -Wall -g -Ilibft -I. -Imlx -Iincludes
+LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit
 NAME=fdf
 SRC=$(wildcard src/*)
 OBJ=$(SRC:src/%.c=%.o)

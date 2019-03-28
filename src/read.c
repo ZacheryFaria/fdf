@@ -6,13 +6,14 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:06:27 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/28 10:51:00 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/28 15:28:34 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <fdf.h>
 
 int		*convert_to_int(char **str, int len)
 {
@@ -39,10 +40,12 @@ t_list	*read_file(char *str, int *len)
 
 	fd = open(str, O_RDONLY);
 	points = 0;
+	*len = 0;
 	while (get_next_line(fd, &buf, 64))
 	{
-		
 		split = ft_strsplitws(buf);
+		if (*len != 0 && *len != array_len(split))
+			return (die("Bad line length."));
 		*len = array_len(split);
 		arr = convert_to_int(split, *len);
 		if (!points)

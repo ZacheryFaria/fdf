@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 11:58:34 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/28 11:55:14 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/28 15:35:46 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,36 @@ void	image_set_pixel(t_mlx *mlx, t_coor *vec, int color)
 {
 	if (vec->y + 1 >= mlx->height)
 		return ;
-	mlx->img->ptr[vec->x + (vec->y * mlx->img->wid / 4)] = color;
+	if (!(vec->x < 0 || vec->x > mlx->width)
+		&& !(vec->y < 0 || vec->y > mlx->height))
+		mlx->img->ptr[(int)(vec->x + (vec->y * mlx->img->wid / 4))] = color;
 }
 
-void	image_plot_line(t_mlx *mlx, t_coor *v1, t_coor *v2, int color)
+void	image_plot_line(t_mlx *mlx, t_coor v1, t_coor v2, int color)
 {
-	t_coor	*dpoint;
-	t_coor	*sign;
+	t_coor	dpoint;
+	t_coor	sign;
 	int		delta_err;
-	t_coor	*npoint;
+	t_coor	npoint;
 	int		err;
 
-	sign = new_coor(v1->x < v2->x ? 1 : -1, v1->y < v2->y ? 1 : -1, 0, 0);
-	dpoint = new_coor(ft_abs(v2->x - v1->x), ft_abs(v2->y - v1->y), 0, 0);
-	delta_err = (dpoint->x > dpoint->y ? dpoint->x : -dpoint->y) / 2;
-	npoint = new_coor(v1->x, v2->y, 0, 0);
-	while (!(v1->x == v2->x && v1->y == v2->y))
+	sign = (t_coor){v1.x < v2.x ? 1 : -1, v1.y < v2.y ? 1 : -1, 0, 0};
+	dpoint = (t_coor){ft_abs(v2.x - v1.x), ft_abs(v2.y - v1.y), 0, 0};
+	delta_err = (dpoint.x > dpoint.y ? dpoint.x : -dpoint.y) / 2;
+	npoint = (t_coor){v1.x, v2.y, 0, 0};
+	while (!(v1.x == v2.x && v1.y == v2.y))
 	{
-		image_set_pixel(mlx, v1, color);
+		image_set_pixel(mlx, &v1, color);
 		err = delta_err;
-		if (err > -dpoint->x)
+		if (err > -dpoint.x)
 		{
-			delta_err -= dpoint->y;
-			v1->x += sign->x;
+			delta_err -= dpoint.y;
+			v1.x += sign.x;
 		}
-		if (err < dpoint->y)
+		if (err < dpoint.y)
 		{
-			delta_err += dpoint->x;
-			v1->y += sign->y;
+			delta_err += dpoint.x;
+			v1.y += sign.y;
 		}
 	}
-	freev(dpoint, sign, npoint, 0);
 }
