@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 09:41:55 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/29 11:52:06 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/29 14:23:29 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct	s_mlx
 
 # define PI 3.14159265359
 # define ISO_TRUE (t_proj){0.523599, 0.523599, 0.523599}
-# define ISO_21 (t_proj){0.46373398, 0.46373398, 0.46373398}
+# define ISO_21 (t_proj){0.463733, 0.463733, 0.463733}
 # define DEFAULT_PROJ ISO_TRUE
 
 int				event_key(int keycode, void *param);
@@ -66,7 +66,7 @@ int				event_close(void);
 
 t_image			*image_new(t_mlx *mlx);
 void			image_set_pixel(t_mlx *mlx, t_coor *vec, int color);
-void			image_plot_line(t_mlx *mlx, t_coor v1, t_coor v2, int c);
+void			image_plot_line(t_mlx *mlx, t_coor v1, t_coor v2);
 
 t_coor			*new_coor(int x, int y, int z, int color);
 

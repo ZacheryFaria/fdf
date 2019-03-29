@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:06:27 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/28 15:28:34 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/29 14:58:24 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ t_list	*read_file(char *str, int *len)
 	char	*buf;
 	t_list	*points;
 
-	fd = open(str, O_RDONLY);
+	if ((fd = open(str, O_RDONLY)) < 0)
+		die("No such file");
 	points = 0;
 	*len = 0;
 	while (get_next_line(fd, &buf, 64))
@@ -52,9 +53,8 @@ t_list	*read_file(char *str, int *len)
 			points = ft_lstnew(arr, sizeof(int) * *len);
 		else
 			ft_lstapd(&points, ft_lstnew(arr, sizeof(int) * *len));
-		free(arr);
 		free_tab(split);
-		free(buf);
+		freev(arr, buf, 0);
 	}
 	return (points);
 }

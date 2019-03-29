@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 10:54:13 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/29 12:27:56 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/29 15:02:33 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ void	calc_points(t_mlx *mlx)
 		{
 			mlx->pbuf[j][i].x = (i - wd) * (SIZE * mlx->zoom);
 			mlx->pbuf[j][i].y = (j - hd) * (SIZE * mlx->zoom);
-			mlx->pbuf[j][i].z = -((int *)points->content)[i] * mlx->zoom;
+			mlx->pbuf[j][i].z = -((int *)points->content)[i];
+			mlx->pbuf[j][i].color = LIME;
+			mlx->pbuf[j][i].z *= mlx->zoom;
 			i++;
 		}
 		j++;
@@ -112,9 +114,9 @@ void	plot_map(t_mlx *mlx)
 		while (j < mlx->mapwid)
 		{
 			if (j < mlx->mapwid - 1)
-				image_plot_line(mlx, mlx->pbuf[i][j], mlx->pbuf[i][j + 1], RED);
+				image_plot_line(mlx, mlx->pbuf[i][j], mlx->pbuf[i][j + 1]);
 			if (i < mlx->maphei - 1)
-				image_plot_line(mlx, mlx->pbuf[i][j], mlx->pbuf[i + 1][j], RED);
+				image_plot_line(mlx, mlx->pbuf[i][j], mlx->pbuf[i + 1][j]);
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 15:29:32 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/29 12:28:09 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/29 15:00:45 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,37 @@ t_coor	**points_init(t_mlx *mlx)
 	return (buf);
 }
 
+char	*basename(char *s)
+{
+	char	*p;
+	int		i;
+
+	if ((p = ft_strrchr(s, '/')) == 0)
+		p = s;
+	if (*p == '/')
+		p++;
+	i = 0;
+	while (p[i])
+	{
+		if (ft_strncmp(p + i, ".fdf", 4) == 0)
+		{
+			p[i] = 0;
+			break ;
+		}
+		i++;
+	}
+	return (p);
+}
+
 int		main(int argc, char **argv)
 {
 	t_mlx	*mlx;
+	char	*welcome;
 
+	welcome = ft_strnew(ft_strlen(argv[1]) + 6);
 	mlx = malloc(sizeof(t_mlx));
 	mlx->points = read_file(argv[1], &mlx->mapwid);
+	ft_strvcat(welcome, "FDF - ", basename(argv[1]), 0);
 	mlx->maphei = ft_lstlen(mlx->points);
 	mlx->pbuf = points_init(mlx);
 	mlx->origin = COOR2(0, 0);
@@ -62,7 +87,7 @@ int		main(int argc, char **argv)
 	mlx->height = 800;
 	mlx->width = 1024;
 	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, mlx->width, mlx->height, "FDF");
+	mlx->win = mlx_new_window(mlx->mlx, mlx->width, mlx->height, welcome);
 	mlx_hook(mlx->win, 2, 1L << 17, &event_key, mlx);
 	mlx_hook(mlx->win, 17, 1L << 17, event_close, mlx);
 	mlx->img = image_new(mlx);
