@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 15:29:32 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/29 11:24:11 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/29 12:28:09 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_coor	**points_init(t_mlx *mlx)
 	return (buf);
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_mlx	*mlx;
 
