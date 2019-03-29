@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 15:29:32 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/28 15:14:39 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/29 11:24:11 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,21 @@ void	*die(char *str)
 	return (0);
 }
 
+t_coor	**points_init(t_mlx *mlx)
+{
+	t_coor	**buf;
+	int		i;
+
+	buf = ft_memalloc(sizeof(buf) * mlx->maphei);
+	i = 0;
+	while (i < mlx->maphei)
+	{
+		buf[i] = ft_memalloc(sizeof(t_coor) * mlx->mapwid);
+		i++;
+	}
+	return (buf);
+}
+
 int	main(int argc, char **argv)
 {
 	t_mlx	*mlx;
@@ -40,6 +55,7 @@ int	main(int argc, char **argv)
 	mlx = malloc(sizeof(t_mlx));
 	mlx->points = read_file(argv[1], &mlx->mapwid);
 	mlx->maphei = ft_lstlen(mlx->points);
+	mlx->pbuf = points_init(mlx);
 	mlx->origin = COOR2(0, 0);
 	mlx->zoom = 1;
 	process_args(argc, argv);

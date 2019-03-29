@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 10:54:13 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/28 15:39:03 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/29 11:55:26 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,51 @@
 
 #define SIZE 20
 
-void	transform_points(t_coor *p[4], t_proj *proj)
+void	transform_points(t_mlx *mlx)
 {
 	int i;
+	int j;
+	t_proj x;
+	t_proj y;
+	t_proj z;
 
 	i = 0;
-	while (i < 4)
+	j = 0;
+	x.deltax = cos(mlx->proj->deltax);
+	x.deltay = sin(mlx->proj->deltax);
+	y.deltax = cos(mlx->proj->deltay);
+	y.deltay = sin(mlx->proj->deltay);
+	z.deltax = cos(mlx->proj->deltaz);
+	z.deltay = sin(mlx->proj->deltaz);
+	while (i < mlx->maphei)
 	{
-		rotate_x(p[i], proj->deltax);
-		rotate_y(p[i], proj->deltay);
-		rotate_z(p[i], proj->deltaz);
+		j = 0;
+		while (j < mlx->mapwid)
+		{
+			rotate_x(&mlx->pbuf[i][j], x.deltax, x.deltay);
+			rotate_y(&mlx->pbuf[i][j], y.deltax, y.deltay);
+			rotate_z(&mlx->pbuf[i][j], z.deltax, z.deltay);
+			j++;
+		}
 		i++;
 	}
 }
 
-void	point_add(t_coor *p[4], float x, float y)
+void	point_add(t_mlx *mlx, float x, float y)
 {
 	int i;
+	int j;
 
 	i = 0;
-	while (i < 4)
+	j = 0;
+	while (i < mlx->maphei)
 	{
-		if (p[i])
+		j = 0;
+		while (j < mlx->mapwid)
 		{
-			p[i]->x += x;
-			p[i]->y += y;
+			mlx->pbuf[i][j].x += x;
+			mlx->pbuf[i][j].y += y;
+			j++;
 		}
 		i++;
 	}
@@ -76,42 +96,57 @@ void	set_points(t_coor *p[4], int j, int i, t_list *points, t_mlx *mlx)
 	}
 }
 
-void	plot_map(t_mlx *mlx)
+void	calc_points(t_mlx *mlx)
 {
-	int i;
-	int j;
-	t_coor	*p[4];
+	int		i;
+	int		j;
+	int		wd;
+	int		hd;
 	t_list	*points;
 
 	i = 0;
 	j = 0;
+	wd = mlx->mapwid / 2;
+	hd = mlx->maphei / 2;
 	points = mlx->points;
 	while (points)
 	{
 		i = 0;
 		while (i < mlx->mapwid)
 		{
-			p[0] = 0;
-			p[1] = 0;
-			p[2] = 0;
-			p[3] = 0;
-			set_points(p, j, i, points, mlx);
-			transform_points(p, mlx->proj);
-			point_add(p, mlx->width / 2, mlx->height / 2);
-			point_add(p, mlx->origin->x, mlx->origin->y);
-			if (p[0] && p[1])
-				image_plot_line(mlx, *p[0], *p[1], RED);
-			if (p[2] && p[3])
-				image_plot_line(mlx, *p[2], *p[3], RED);
-			if (p[1] && p[3])
-				image_plot_line(mlx, *p[1], *p[3], RED);	
-			if (p[0] && p[2])
-				image_plot_line(mlx, *p[0], *p[2], RED);
-			freev(p[0], p[1], p[2], p[3], 0);
+			mlx->pbuf[j][i].x = (i - wd) * (SIZE * mlx->zoom);
+			mlx->pbuf[j][i].y = (j - hd) * (SIZE * mlx->zoom);
+			mlx->pbuf[j][i].z = -((int *)points->content)[i] * mlx->zoom;
 			i++;
 		}
 		j++;
 		points = points->next;
+	}
+}
+
+void	plot_map(t_mlx *mlx)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	calc_points(mlx);
+	transform_points(mlx);
+	point_add(mlx, mlx->width / 2, mlx->height / 2);
+	point_add(mlx, mlx->origin->x, mlx->origin->y);
+	while (i < mlx->maphei)
+	{
+		j = 0;
+		while (j < mlx->mapwid)
+		{
+			if (j < mlx->mapwid - 1)
+				image_plot_line(mlx, mlx->pbuf[i][j], mlx->pbuf[i][j + 1], RED);
+			if (i < mlx->maphei - 1)
+				image_plot_line(mlx, mlx->pbuf[i][j], mlx->pbuf[i + 1][j], RED);
+			j++;
+		}
+		i++;
 	}
 }
 

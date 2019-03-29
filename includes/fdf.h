@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 09:41:55 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/28 15:30:37 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/29 11:52:06 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 typedef struct	s_proj
 {
-	double	deltax;
-	double	deltay;
-	double	deltaz;
+	float	deltax;
+	float	deltay;
+	float	deltaz;
 }				t_proj;
 
 typedef struct	s_image
@@ -36,7 +36,7 @@ typedef struct	s_coor
 {
 	int		x;
 	int		y;
-	double	z;
+	float	z;
 	int		color;
 }				t_coor;
 
@@ -53,6 +53,7 @@ typedef struct	s_mlx
 	t_proj		*proj;
 	t_coor		*origin;
 	double		zoom;
+	t_coor		**pbuf;
 }				t_mlx;
 
 # define PI 3.14159265359
@@ -69,9 +70,9 @@ void			image_plot_line(t_mlx *mlx, t_coor v1, t_coor v2, int c);
 
 t_coor			*new_coor(int x, int y, int z, int color);
 
-void			rotate_x(t_coor *point, double theta);
-void			rotate_y(t_coor *point, double theta);
-void			rotate_z(t_coor *point, double theta);
+void			rotate_x(t_coor *point, float thetacos, float thetasin);
+void			rotate_y(t_coor *point, float thetacos, float thetasin);
+void			rotate_z(t_coor *point, float thetacos, float thetasin);
 
 # define COOR2(x,y) new_coor(x, y, 0, 0)
 
