@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 09:41:55 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 13:33:24 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 14:43:48 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int				event_mouse_released(int keycode, int x, int y, void *ptr);
 
 t_image			*image_new(t_mlx *mlx);
 void			image_set_pixel(t_mlx *mlx, t_coor *vec, int color);
-void			image_plot_line(t_mlx *mlx, t_coor v1, t_coor v2);
+void			image_plot_line(t_mlx *mlx, t_coor v1, t_coor v2, t_coor orig);
+int				get_light(int start, int end, double percent);
 
 t_coor			*new_coor(int x, int y, int z, int color);
 
@@ -92,6 +93,7 @@ void			rotate_z(t_coor *point, double thetacos, double thetasin);
 # define COOR2(x,y) new_coor(x, y, 0, 0)
 
 t_list			*read_file(char *str, int *len);
+char			*basename(char *s);
 
 void			freev(void *v, ...);
 void			plot_map(t_mlx *mlx);

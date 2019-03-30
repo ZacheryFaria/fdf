@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 11:17:23 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 12:37:50 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 14:20:16 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	event_mouse(int x, int y, void *ptr)
 	return (0);
 }
 
-int event_mouse_pressed(int keycode, int x, int y, void *ptr)
+int	event_mouse_pressed(int keycode, int x, int y, void *ptr)
 {
 	t_mlx *mlx;
 
@@ -44,7 +44,7 @@ int event_mouse_pressed(int keycode, int x, int y, void *ptr)
 	return (0);
 }
 
-int event_mouse_released(int keycode, int x, int y, void *ptr)
+int	event_mouse_released(int keycode, int x, int y, void *ptr)
 {
 	t_mlx *mlx;
 

@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 15:29:32 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 14:09:03 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 14:44:59 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,12 @@
 
 void	process_args(int argc, char **argv)
 {
-	argv++;
+	(void)argv;
 	if (argc < 2)
 	{
-		ft_putendl("usage: ./fdf <file> [proj]");
+		ft_putendl("usage: ./fdf <file>");
 		exit(0);
 	}
-}
-
-void	*die(char *str)
-{
-	ft_putstr(str);
-	exit(1);
-	return (0);
 }
 
 t_coor	**points_init(t_mlx *mlx)
@@ -48,28 +41,6 @@ t_coor	**points_init(t_mlx *mlx)
 	return (buf);
 }
 
-char	*basename(char *s)
-{
-	char	*p;
-	int		i;
-
-	if ((p = ft_strrchr(s, '/')) == 0)
-		p = s;
-	if (*p == '/')
-		p++;
-	i = 0;
-	while (p[i])
-	{
-		if (ft_strncmp(p + i, ".fdf", 4) == 0)
-		{
-			p[i] = 0;
-			break ;
-		}
-		i++;
-	}
-	return (p);
-}
-
 void	bind_event(t_mlx *mlx)
 {
 	mlx_hook(mlx->win, 2, 1L << 17, event_key, mlx);
@@ -78,6 +49,7 @@ void	bind_event(t_mlx *mlx)
 	mlx_hook(mlx->win, 4, 1L << 17, event_mouse_pressed, mlx);
 	mlx_hook(mlx->win, 5, 1L << 17, event_mouse_released, mlx);
 	mlx_loop_hook(mlx->mlx, fdf_loop, mlx);
+	mlx->zoom = 30.0 / mlx->mapwid;
 }
 
 void	find_biggest(t_mlx *mlx, int *num)
@@ -110,6 +82,7 @@ int		main(int argc, char **argv)
 	t_mlx	*mlx;
 	char	*welcome;
 
+	process_args(argc, argv);
 	welcome = ft_strnew(ft_strlen(argv[1]) + 6);
 	mlx = malloc(sizeof(t_mlx));
 	mlx->points = read_file(argv[1], &mlx->mapwid);
@@ -121,15 +94,13 @@ int		main(int argc, char **argv)
 	mlx->zoom = 1;
 	mlx->rotate = 0;
 	mlx->update = 0;
-	process_args(argc, argv);
 	mlx->height = 1080;
 	mlx->width = 1920;
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, mlx->width, mlx->height, welcome);
 	mlx->img = image_new(mlx);
-	mlx->proj = &DEFAULT_PROJ;
 	bind_event(mlx);
-	mlx->zoom = 30.0 / mlx->mapwid;
+	mlx->proj = &DEFAULT_PROJ;
 	plot_map(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	mlx_loop(mlx->mlx);

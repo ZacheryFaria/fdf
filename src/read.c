@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:06:27 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 13:54:52 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 14:19:51 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 int		*convert_to_int(char **str, int len)
 {
-	int i;
-	int	*tab;
-	char **s;
+	int		i;
+	int		*tab;
+	char	**s;
 
 	i = 0;
 	tab = ft_memalloc(len * sizeof(int) * 2);
@@ -31,7 +31,6 @@ int		*convert_to_int(char **str, int len)
 			tab[i + len] = strtol(s[1], NULL, 16);
 		else
 			tab[i + len] = 0;
-		
 		i++;
 		free_tab(s);
 	}

@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 10:54:13 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 13:55:03 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 14:28:11 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,27 +74,23 @@ void	calc_points(t_mlx *mlx)
 	t_coor	d;
 	t_list	*points;
 
-	i = 0;
-	j = 0;
+	j = -1;
 	d.x = mlx->mapwid / 2;
 	d.y = mlx->maphei / 2;
 	points = mlx->points;
-	while (points)
+	while (points && ++j > -1)
 	{
-		i = 0;
-		while (i < mlx->mapwid)
+		i = -1;
+		while (++i < mlx->mapwid)
 		{
 			mlx->pbuf[j][i].x = (i - d.x) * (SIZE * mlx->zoom);
 			mlx->pbuf[j][i].y = (j - d.y) * (SIZE * mlx->zoom);
 			mlx->pbuf[j][i].z = -((int *)points->content)[i];
+			mlx->pbuf[j][i].color = ((int *)points->content)[i + mlx->mapwid];
 			if (((int *)points->content)[i + mlx->mapwid] == 0)
 				mlx->pbuf[j][i].color = LIME;
-			else
-				mlx->pbuf[j][i].color = ((int *)points->content)[i + mlx->mapwid];
 			mlx->pbuf[j][i].z *= mlx->zoom;
-			i++;
 		}
-		j++;
 		points = points->next;
 	}
 }

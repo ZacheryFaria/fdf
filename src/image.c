@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 11:58:34 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 12:36:23 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 14:43:56 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,6 @@ double	percent(int start, int end, int current)
 	return ((distance == 0) ? 1.0 : (placement / distance));
 }
 
-int		get_light(int start, int end, double percentage)
-{
-	return ((int)((1 - percentage) * start + percentage * end));
-}
-
 int		get_color(t_coor start, t_coor end, t_coor current, t_coor delta)
 {
 	double	p;
@@ -73,15 +68,13 @@ int		get_color(t_coor start, t_coor end, t_coor current, t_coor delta)
 	return ((red << 16) | (green << 8) | blue);
 }
 
-void	image_plot_line(t_mlx *mlx, t_coor v1, t_coor v2)
+void	image_plot_line(t_mlx *mlx, t_coor v1, t_coor v2, t_coor orig)
 {
 	t_coor	delta;
 	t_coor	sign;
 	t_coor	err;
 	t_coor	npoint;
-	t_coor	orig;
 
-	orig = v1;
 	sign = (t_coor){v1.x < v2.x ? 1 : -1, v1.y < v2.y ? 1 : -1, 0, 0};
 	delta = (t_coor){ft_abs(v2.x - v1.x), ft_abs(v2.y - v1.y), 0, 0};
 	err.x = (delta.x > delta.y ? delta.x : -delta.y) / 2;

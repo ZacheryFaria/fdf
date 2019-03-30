@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 12:43:47 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 13:07:28 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 14:48:35 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	*thread_draw(void *param)
 	t_mlx	*mlx;
 	int		i;
 	int		j;
+	t_coor	orig;
 
 	args = param;
 	mlx = args->mlx;
@@ -30,10 +31,11 @@ void	*thread_draw(void *param)
 		i = args->start;
 		while (j < mlx->mapwid)
 		{
+			orig = mlx->pbuf[i][j];
 			if (j < mlx->mapwid - 1)
-				image_plot_line(mlx, mlx->pbuf[i][j], mlx->pbuf[i][j + 1]);
+				image_plot_line(mlx, orig, mlx->pbuf[i][j + 1], orig);
 			if (i < mlx->maphei - 1)
-				image_plot_line(mlx, mlx->pbuf[i][j], mlx->pbuf[i + 1][j]);
+				image_plot_line(mlx, orig, mlx->pbuf[i + 1][j], orig);
 			j++;
 		}
 		args->start += THREADS;
@@ -46,7 +48,7 @@ void	thread_join(pthread_t *threads)
 {
 	int i;
 	int	*arg;
-	
+
 	i = 0;
 	arg = malloc(sizeof(int));
 	while (i < THREADS)

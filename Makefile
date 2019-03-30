@@ -1,26 +1,27 @@
 CC=clang
-CFLAGS=-Werror -Wextra -Wall -g -Ilibft -I. -Imlx -Iincludes -Ofast -finline-functions -fsanitize=address -march=native -pthread
-LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit -pthread -fsanitize=address
+CFLAGS=-Werror -Wextra -Wall -g -Ilibft -I. -Imlx -Iincludes -Ofast -finline-functions -march=native -pthread
+LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit -pthread 
 NAME=fdf
 SRC=$(wildcard src/*)
 OBJ=$(SRC:src/%.c=%.o)
 SHELL := /bin/bash
 
-.PHONY: clean fclean all re norm norme debug test norman
+.PHONY: clean fclean all re norm norme debug test norman update
 
 VPATH = src obj libft/includes include
 
-$(NAME): update $(OBJ)
+$(NAME): $(OBJ)
+	@./update.sh
 	@make -C mlx
 	@make -C libft
-	@$(CC) -o $(NAME) obj/* $(LFLAGS)
+	$(CC) -o $(NAME) obj/* $(LFLAGS)
 	@echo "fdf build complete!"
 
 all: $(NAME)
 
 %.o: %.c
 	@mkdir -p obj
-	@$(CC) $(CFLAGS) -o obj/$@ -c $<
+	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 clean:
 	@make -C mlx clean
