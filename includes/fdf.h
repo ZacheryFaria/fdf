@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 09:41:55 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 13:00:12 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 13:33:24 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 typedef struct	s_proj
 {
-	float	deltax;
-	float	deltay;
-	float	deltaz;
+	double		deltax;
+	double		deltay;
+	double		deltaz;
 }				t_proj;
 
 typedef struct	s_image
@@ -36,7 +36,7 @@ typedef struct	s_coor
 {
 	int		x;
 	int		y;
-	float	z;
+	double	z;
 	int		color;
 }				t_coor;
 
@@ -58,6 +58,7 @@ typedef struct	s_mlx
 	t_coor		mouse_c;
 	int			update;
 	int			rotate;
+	int			max_height;
 }				t_mlx;
 
 typedef	struct	s_args
@@ -84,9 +85,9 @@ void			image_plot_line(t_mlx *mlx, t_coor v1, t_coor v2);
 
 t_coor			*new_coor(int x, int y, int z, int color);
 
-void			rotate_x(t_coor *point, float thetacos, float thetasin);
-void			rotate_y(t_coor *point, float thetacos, float thetasin);
-void			rotate_z(t_coor *point, float thetacos, float thetasin);
+void			rotate_x(t_coor *point, double thetacos, double thetasin);
+void			rotate_y(t_coor *point, double thetacos, double thetasin);
+void			rotate_z(t_coor *point, double thetacos, double thetasin);
 
 # define COOR2(x,y) new_coor(x, y, 0, 0)
 

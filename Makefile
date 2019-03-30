@@ -1,6 +1,6 @@
 CC=clang
-CFLAGS=-Werror -Wextra -Wall -g -Ilibft -I. -Imlx -Iincludes -Ofast -finline-functions -march=native -pthread
-LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit -pthread
+CFLAGS=-Werror -Wextra -Wall -g -Ilibft -I. -Imlx -Iincludes -Ofast -finline-functions -fsanitize=address -march=native -pthread
+LFLAGS=-L libft/ -lft -L mlx/ -lmlx -framework OpenGL -framework AppKit -pthread -fsanitize=address
 NAME=fdf
 SRC=$(wildcard src/*)
 OBJ=$(SRC:src/%.c=%.o)

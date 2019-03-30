@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 10:54:13 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 13:07:15 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 13:55:03 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ void	calc_points(t_mlx *mlx)
 			mlx->pbuf[j][i].x = (i - d.x) * (SIZE * mlx->zoom);
 			mlx->pbuf[j][i].y = (j - d.y) * (SIZE * mlx->zoom);
 			mlx->pbuf[j][i].z = -((int *)points->content)[i];
-			mlx->pbuf[j][i].color = LIME;
+			if (((int *)points->content)[i + mlx->mapwid] == 0)
+				mlx->pbuf[j][i].color = LIME;
+			else
+				mlx->pbuf[j][i].color = ((int *)points->content)[i + mlx->mapwid];
 			mlx->pbuf[j][i].z *= mlx->zoom;
 			i++;
 		}
