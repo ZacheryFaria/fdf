@@ -6,14 +6,14 @@ SRC=$(wildcard src/*)
 OBJ=$(SRC:src/%.c=%.o)
 SHELL := /bin/bash
 
-.PHONY: clean fclean all re norm norme debug test norman update
+.PHONY: clean fclean all re norm norme debug test norman update libft
 
 VPATH = src obj libft/includes include
 
 $(NAME): libft $(OBJ)
 	@make -C mlx
 	@make -C libft
-	$(CC) -o $(NAME) obj/* $(LFLAGS)
+	@$(CC) -o $(NAME) obj/* $(LFLAGS)
 	@echo "fdf build complete!"
 
 all: $(NAME)
