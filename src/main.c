@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 15:29:32 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 13:55:50 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 14:09:03 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int		main(int argc, char **argv)
 	mlx->img = image_new(mlx);
 	mlx->proj = &DEFAULT_PROJ;
 	bind_event(mlx);
+	mlx->zoom = 30.0 / mlx->mapwid;
 	plot_map(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	mlx_loop(mlx->mlx);
