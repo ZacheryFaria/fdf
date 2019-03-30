@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 15:29:32 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/29 15:00:45 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 12:39:51 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,16 @@ char	*basename(char *s)
 	return (p);
 }
 
+void	bind_event(t_mlx *mlx)
+{
+	mlx_hook(mlx->win, 2, 1L << 17, event_key, mlx);
+	mlx_hook(mlx->win, 17, 1L << 17, event_close, mlx);
+	mlx_hook(mlx->win, 6, 1L << 17, event_mouse, mlx);
+	mlx_hook(mlx->win, 4, 1L << 17, event_mouse_pressed, mlx);
+	mlx_hook(mlx->win, 5, 1L << 17, event_mouse_released, mlx);
+	mlx_loop_hook(mlx->mlx, fdf_loop, mlx);
+}
+
 int		main(int argc, char **argv)
 {
 	t_mlx	*mlx;
@@ -83,15 +93,16 @@ int		main(int argc, char **argv)
 	mlx->pbuf = points_init(mlx);
 	mlx->origin = COOR2(0, 0);
 	mlx->zoom = 1;
+	mlx->rotate = 0;
+	mlx->update = 0;
 	process_args(argc, argv);
 	mlx->height = 800;
 	mlx->width = 1024;
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, mlx->width, mlx->height, welcome);
-	mlx_hook(mlx->win, 2, 1L << 17, &event_key, mlx);
-	mlx_hook(mlx->win, 17, 1L << 17, event_close, mlx);
 	mlx->img = image_new(mlx);
 	mlx->proj = &DEFAULT_PROJ;
+	bind_event(mlx);
 	plot_map(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	mlx_loop(mlx->mlx);

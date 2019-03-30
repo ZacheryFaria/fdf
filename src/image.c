@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 11:58:34 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/29 15:00:04 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 12:36:23 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,26 @@ int		get_light(int start, int end, double percentage)
 	return ((int)((1 - percentage) * start + percentage * end));
 }
 
-int	get_color(t_coor start, t_coor end, t_coor current, t_coor delta)
+int		get_color(t_coor start, t_coor end, t_coor current, t_coor delta)
 {
-	double	percentage;
+	double	p;
 	int		red;
 	int		green;
 	int		blue;
 
 	if (delta.x > delta.y)
-		percentage = percent(start.x, end.x, current.x);
+		p = percent(start.x, end.x, current.x);
 	else
-		percentage = percent(start.y, end.y, current.y);
-	red = get_light((start.color >> 16) & 0xFF, (end.color >> 16) & 0xFF, percentage);
-	green = get_light((start.color >> 8) & 0xFF, (end.color >> 8) & 0xFF, percentage);
-	blue = get_light(start.color & 0xFF, end.color & 0xFF, percentage);
+		p = percent(start.y, end.y, current.y);
+	red = get_light((start.color >> 16) & 0xFF, (end.color >> 16) & 0xFF, p);
+	green = get_light((start.color >> 8) & 0xFF, (end.color >> 8) & 0xFF, p);
+	blue = get_light(start.color & 0xFF, end.color & 0xFF, p);
 	return ((red << 16) | (green << 8) | blue);
 }
 
 void	image_plot_line(t_mlx *mlx, t_coor v1, t_coor v2)
 {
-	t_coor	dpoint;
+	t_coor	delta;
 	t_coor	sign;
 	t_coor	err;
 	t_coor	npoint;
@@ -83,21 +83,21 @@ void	image_plot_line(t_mlx *mlx, t_coor v1, t_coor v2)
 
 	orig = v1;
 	sign = (t_coor){v1.x < v2.x ? 1 : -1, v1.y < v2.y ? 1 : -1, 0, 0};
-	dpoint = (t_coor){ft_abs(v2.x - v1.x), ft_abs(v2.y - v1.y), 0, 0};
-	err.x = (dpoint.x > dpoint.y ? dpoint.x : -dpoint.y) / 2;
+	delta = (t_coor){ft_abs(v2.x - v1.x), ft_abs(v2.y - v1.y), 0, 0};
+	err.x = (delta.x > delta.y ? delta.x : -delta.y) / 2;
 	npoint = (t_coor){v1.x, v2.y, 0, 0};
 	while (!(v1.x == v2.x && v1.y == v2.y))
 	{
-		image_set_pixel(mlx, &v1, get_color(orig, v2, v1, dpoint));
+		image_set_pixel(mlx, &v1, get_color(orig, v2, v1, delta));
 		err.y = err.x;
-		if (err.y > -dpoint.x)
+		if (err.y > -delta.x)
 		{
-			err.x -= dpoint.y;
+			err.x -= delta.y;
 			v1.x += sign.x;
 		}
-		if (err.y < dpoint.y)
+		if (err.y < delta.y)
 		{
-			err.x += dpoint.x;
+			err.x += delta.x;
 			v1.y += sign.y;
 		}
 	}

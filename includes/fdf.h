@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 09:41:55 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/29 14:23:29 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/30 13:00:12 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,17 @@ typedef struct	s_mlx
 	t_coor		*origin;
 	double		zoom;
 	t_coor		**pbuf;
+	t_coor		mouse_p;
+	t_coor		mouse_c;
+	int			update;
+	int			rotate;
 }				t_mlx;
+
+typedef	struct	s_args
+{
+	int			start;
+	t_mlx		*mlx;
+}				t_args;
 
 # define PI 3.14159265359
 # define ISO_TRUE (t_proj){0.523599, 0.523599, 0.523599}
@@ -63,6 +73,10 @@ typedef struct	s_mlx
 
 int				event_key(int keycode, void *param);
 int				event_close(void);
+int				event_mouse(int x, int y, void *ptr);
+int				fdf_loop(void *ptr);
+int				event_mouse_pressed(int keycode, int x, int y, void *ptr);
+int				event_mouse_released(int keycode, int x, int y, void *ptr);
 
 t_image			*image_new(t_mlx *mlx);
 void			image_set_pixel(t_mlx *mlx, t_coor *vec, int color);
@@ -81,6 +95,7 @@ t_list			*read_file(char *str, int *len);
 void			freev(void *v, ...);
 void			plot_map(t_mlx *mlx);
 void			redraw(t_mlx *mlx);
+void			startup_threads(t_mlx *mlx);
 
 void			*die(char *str);
 
