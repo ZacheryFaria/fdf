@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 09:41:55 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 14:43:48 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/31 11:36:31 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void			rotate_z(t_coor *point, double thetacos, double thetasin);
 t_list			*read_file(char *str, int *len);
 char			*basename(char *s);
 
-void			freev(void *v, ...);
 void			plot_map(t_mlx *mlx);
 void			redraw(t_mlx *mlx);
 void			startup_threads(t_mlx *mlx);
