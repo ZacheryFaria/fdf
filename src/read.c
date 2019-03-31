@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:06:27 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 15:06:46 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/03/31 11:04:06 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ t_list	*read_file(char *str, int *len)
 		free_tab(split);
 		freev(arr, buf, 0);
 	}
+	free(buf);
 	return (points);
 }
