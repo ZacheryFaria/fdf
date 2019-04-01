@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 12:43:47 by zfaria            #+#    #+#             */
-/*   Updated: 2019/04/01 10:28:06 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/04/01 11:30:52 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ void	startup_threads(t_mlx *mlx)
 		i++;
 	}
 	thread_join(threads, mlx);
+	free(threads);
 }
