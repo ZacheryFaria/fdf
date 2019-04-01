@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 12:43:47 by zfaria            #+#    #+#             */
-/*   Updated: 2019/04/01 10:24:31 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/04/01 10:28:06 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	thread_join(pthread_t *threads, t_mlx *mlx)
 
 void	startup_threads(t_mlx *mlx)
 {
-	pthread_t	*threads;;
+	pthread_t	*threads;
 	int			i;
 	int			line_thread;
 	int			line_extra;

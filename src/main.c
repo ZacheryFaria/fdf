@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 15:29:32 by zfaria            #+#    #+#             */
-/*   Updated: 2019/04/01 10:27:10 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/04/01 10:28:12 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	process_args(int argc, char **argv, t_mlx *mlx)
 	{
 		mlx->threads = 2;
 	}
-	
 }
 
 t_coor	**points_init(t_mlx *mlx)
