@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 15:29:32 by zfaria            #+#    #+#             */
-/*   Updated: 2019/04/01 10:17:03 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/04/01 10:27:10 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "fdf.h"
 #include "colors.h"
 
-void	process_args(int argc, char **argv)
+void	process_args(int argc, char **argv, t_mlx *mlx)
 {
 	(void)argv;
 	if (argc < 2)
@@ -24,6 +24,15 @@ void	process_args(int argc, char **argv)
 		ft_putendl("usage: ./fdf <file>");
 		exit(0);
 	}
+	if (argc == 3)
+	{
+		mlx->threads = ft_atoi(argv[2]);
+	}
+	else
+	{
+		mlx->threads = 2;
+	}
+	
 }
 
 t_coor	**points_init(t_mlx *mlx)
@@ -83,9 +92,9 @@ int		main(int argc, char **argv)
 	t_mlx	*mlx;
 	char	*welcome;
 
-	process_args(argc, argv);
 	welcome = ft_strnew(ft_strlen(argv[1]) + 6);
 	mlx = malloc(sizeof(t_mlx));
+	process_args(argc, argv, mlx);
 	mlx->points = read_file(argv[1], &mlx->mapwid);
 	find_biggest(mlx, &mlx->max_height);
 	ft_strvcat(welcome, "FDF - ", basename(argv[1]), 0);

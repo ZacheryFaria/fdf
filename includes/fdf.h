@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 09:41:55 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/31 11:36:31 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/04/01 10:23:02 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct	s_mlx
 	int			update;
 	int			rotate;
 	int			max_height;
+	int			threads;
 }				t_mlx;
 
 typedef	struct	s_args

@@ -6,14 +6,12 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 12:43:47 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 14:48:35 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/04/01 10:24:31 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include <fdf.h>
-
-#define THREADS 8
 
 void	*thread_draw(void *param)
 {
@@ -38,20 +36,20 @@ void	*thread_draw(void *param)
 				image_plot_line(mlx, orig, mlx->pbuf[i + 1][j], orig);
 			j++;
 		}
-		args->start += THREADS;
+		args->start += mlx->threads;
 	}
 	free(param);
 	return (0);
 }
 
-void	thread_join(pthread_t *threads)
+void	thread_join(pthread_t *threads, t_mlx *mlx)
 {
 	int i;
 	int	*arg;
 
 	i = 0;
 	arg = malloc(sizeof(int));
-	while (i < THREADS)
+	while (i < mlx->threads)
 	{
 		pthread_join(threads[i], (void **)arg);
 		i++;
@@ -61,16 +59,17 @@ void	thread_join(pthread_t *threads)
 
 void	startup_threads(t_mlx *mlx)
 {
-	pthread_t	threads[THREADS];
+	pthread_t	*threads;;
 	int			i;
 	int			line_thread;
 	int			line_extra;
 	t_args		*args;
 
 	i = 0;
-	line_thread = mlx->maphei / THREADS;
-	line_extra = mlx->maphei % THREADS;
-	while (i < THREADS)
+	threads = malloc(sizeof(pthread_t) * mlx->threads);
+	line_thread = mlx->maphei / mlx->threads;
+	line_extra = mlx->maphei % mlx->threads;
+	while (i < mlx->threads)
 	{
 		args = malloc(sizeof(t_args));
 		args->mlx = mlx;
@@ -78,5 +77,5 @@ void	startup_threads(t_mlx *mlx)
 		pthread_create(&threads[i], NULL, thread_draw, args);
 		i++;
 	}
-	thread_join(threads);
+	thread_join(threads, mlx);
 }
