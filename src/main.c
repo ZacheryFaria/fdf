@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 15:29:32 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 14:44:59 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/04/01 10:17:03 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	bind_event(t_mlx *mlx)
 	mlx_hook(mlx->win, 5, 1L << 17, event_mouse_released, mlx);
 	mlx_loop_hook(mlx->mlx, fdf_loop, mlx);
 	mlx->zoom = 30.0 / mlx->mapwid;
+	mlx->proj = malloc(sizeof(t_proj));
 }
 
 void	find_biggest(t_mlx *mlx, int *num)
@@ -100,7 +101,7 @@ int		main(int argc, char **argv)
 	mlx->win = mlx_new_window(mlx->mlx, mlx->width, mlx->height, welcome);
 	mlx->img = image_new(mlx);
 	bind_event(mlx);
-	mlx->proj = &DEFAULT_PROJ;
+	*mlx->proj = DEFAULT_PROJ;
 	plot_map(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	mlx_loop(mlx->mlx);

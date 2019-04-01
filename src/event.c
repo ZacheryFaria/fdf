@@ -6,7 +6,7 @@
 /*   By: zfaria <zfaria@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 10:08:56 by zfaria            #+#    #+#             */
-/*   Updated: 2019/03/30 14:48:02 by zfaria           ###   ########.fr       */
+/*   Updated: 2019/04/01 10:20:05 by zfaria           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ int		event_key(int keycode, void *param)
 		exit(0);
 	}
 	if (keycode == 34)
-		mlx->proj = &ISO_21;
+		*mlx->proj = ISO_21;
+	else if (keycode == 31)
+		*mlx->proj = DEFAULT_PROJ;
 	event_trans(keycode, param);
 	event_rot(keycode, param);
 	redraw(mlx);
